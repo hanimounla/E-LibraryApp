@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/publisherSelect"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:orientation="horizontal"
+        >
+
+        <Spinner
+            android:id="@+id/categoriesSpinner"
+            android:layout_width="180sp"
+            android:layout_height="40sp"
+            android:spinnerMode="dropdown"
+            android:layout_gravity="center"
+            app:spn_labelTextSize="20sp"
+             />
+
+        <TextView
+            android:id="@+id/totalBooks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:inputType="textPersonName"
+            tools:text="Total Books:" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/progressBar"
+        android:layout_below="@+id/publisherSelect"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ListView
+        android:id="@+id/booksList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="1dp"
+        android:layout_below="@id/progressBar"
+        android:padding="5dp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#9c9999"
+    tools:context=".AllBooks">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Books"
+            android:layout_marginTop="7dp"
+            android:typeface="sans"
+            android:textSize="35sp"
+            android:textColor="#ffffff"
+            android:gravity="center" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textStyle="bold"
+            android:background="#3b55ab"
+            android:padding="10dp"
+            android:hint="BOOK NAME"
+            android:textSize="20sp"
+            android:id="@+id/edtproname" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:hint="DESCRIPTION"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textStyle="bold"
+            android:background="#3b55ab"
+            android:padding="10dp"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:minLines="2"
+            android:layout_gravity="top|left"
+            android:layout_marginTop="5dp"
+            android:id="@+id/edtprodesc" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#2736bf"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:layout_margin="2dp"
+                android:padding="7dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/btnadd"
+                android:text="Add" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="2dp"
+                android:background="#2736bf"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:padding="7dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/btnupdate"
+                android:text="Update" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#2736bf"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:layout_margin="2dp"
+                android:padding="7dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/btndelete"
+                android:text="Delete" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/pbbar" />
+
+        <ListView
+            android:id="@+id/lstproducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#808080"
+            android:layout_marginTop="5dp"
+            android:dividerHeight="1dp"
+            android:padding="5dp">
+        </ListView>
+    </LinearLayout>
+</RelativeLayout>

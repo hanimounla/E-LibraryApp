@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/totalPages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:inputType="textPersonName"
+        android:text="Total pages: "
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/progressBar"
+        android:layout_below="@+id/totalPages"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ListView
+        android:id="@+id/pagesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#808080"
+        android:dividerHeight="1dp"
+        android:padding="5dp"
+        android:layout_below="@+id/progressBar"
+        android:layout_alignParentStart="true"
+        />
+</RelativeLayout>
