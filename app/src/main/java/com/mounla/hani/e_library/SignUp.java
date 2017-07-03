@@ -103,7 +103,7 @@ public class SignUp extends Activity {
             {
                 z = "Exceptions";
             }
-            return "Success";
+            return z;
         }
     }
 }
