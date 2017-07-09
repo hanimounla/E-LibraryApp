@@ -170,7 +170,7 @@ public class Main extends AppCompatActivity
                 tag = "publishers";
                 fragment = new FragmentPublishers();
                 break;
-            case R.id.nav_about:
+            case R.id.nav_statistics:
                 startActivity(new Intent(this, Statistics.class));
                 return true;
 //            case R.id.nav_share : Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
