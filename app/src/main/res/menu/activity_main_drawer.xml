@@ -15,12 +15,16 @@
             android:title="Categories" />
         <item
             android:id="@+id/nav_authors"
-            android:icon="@drawable/android"
+            android:icon="@drawable/author"
             android:title="Authors" />
         <item
             android:id="@+id/nav_publishers"
-            android:icon="@android:drawable/ic_menu_myplaces"
+            android:icon="@drawable/publisher"
             android:title="Publishers" />
+        <item
+            android:id="@+id/nav_statistics"
+            android:icon="@drawable/statistics"
+            android:title="Statistics" />
         <item
             android:id="@+id/nav_about"
             android:icon="@android:drawable/ic_dialog_info"
