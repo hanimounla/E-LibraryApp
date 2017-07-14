@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@drawable/login_background"
     android:scrollbarStyle="outsideOverlay">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Welcome to E-library"
-            android:textColor="@color/colorPrimary"
+            android:textColor="#fff"
             android:textSize="35sp"
             android:textStyle="bold"
             android:typeface="sans" />
