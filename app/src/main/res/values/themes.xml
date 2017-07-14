@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="button_flat_color">
+        <item>@style/LightFlatColorButtonRippleStyle</item>
+        <item>@style/DarkFlatColorButtonRippleStyle</item>
+    </array>
+
+
+    <array name="button_flat_wave_color">
+        <item>@style/LightFlatWaveColorButtonRippleStyle</item>
+        <!--<item>@style/DarkFlatWaveColorButtonRippleStyle</item>-->
+    </array>
+</resources>

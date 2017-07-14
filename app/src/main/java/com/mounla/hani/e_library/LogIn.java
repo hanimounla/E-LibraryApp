@@ -41,7 +41,7 @@ public class LogIn extends Activity
         connectionClass = new ConnectionClass();
         userNameTB = (EditText) findViewById(R.id.userNameTB);
         userPasswordTB = (EditText) findViewById(R.id.userPasswordTB);
-        btnlogin = (Button) findViewById(R.id.btnlogin);
+        btnlogin = (Button) findViewById(R.id.btn_login);
         pbbar = (ProgressBar) findViewById(R.id.pbbar);
         rememberMe = (CheckBox)findViewById(R.id.rememberMeCB);
         IPTB = (EditText)findViewById(R.id.IPTB);
