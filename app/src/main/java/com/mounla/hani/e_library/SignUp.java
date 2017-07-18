@@ -20,10 +20,11 @@ public class SignUp extends Activity {
     EditText userNameTB, userPasswordTB , confirmPassTB;
     Button btnSignUp;
     CheckBox rememberMe;
-    static final String PREFS_NAME = "MyPrefsFile";
-    String PREF_USERNAME = "prefsUsername";
-    String PREF_PASSWORD ="prefsPassword";
-    String PREF_SAVED = "prefsSaved";
+    public static final String PREFS_NAME = "MyPrefsFile";
+    public String PREFS_USERNAME= "prefsUsername";
+    public String PREFS_PASSWORD="prefsPassword";
+    public String PREFS_SAVED = "prefsSaved";
+    public String PREFS_IP = "ipAddress";
     SharedPreferences pref ;
 
     String enterdName;
@@ -71,15 +72,27 @@ public class SignUp extends Activity {
             }
         });
     }
+    private void setRememberMeSettings() {
+//        SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+        String passwordInString = userNameTB.getText().toString();
+        String userNameInString = userPasswordTB.getText().toString();
+        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                .edit()
+                .putString(PREFS_USERNAME, passwordInString)
+                .putString(PREFS_PASSWORD, userNameInString)
+                .putBoolean(PREFS_SAVED, rememberMe.isChecked())
+                .commit();
+    }
 
     private class DoSignUp extends AsyncTask<String,String,String>
     {
         String z  = "";
         @Override
         protected void onPostExecute(String z){
-            if(z == "Success")
-            {
 
+            Toast.makeText(getApplicationContext(), z, Toast.LENGTH_SHORT).show();
+            if(z.equals("Account Created"))
+            {
 
             }
         }
@@ -88,15 +101,22 @@ public class SignUp extends Activity {
 
             try
             {
+                SharedPreferences pref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                String IPPref = pref.getString("ipAddress","");
+                if(IPPref == null)
+                    IPPref = "202.202.202.202";
+
                 connectionClass = new ConnectionClass();
-                Connection con = connectionClass.CONN(ConnectionClass.ip);
+                Connection con = connectionClass.CONN(IPPref);
                 if (ConnectionClass.conn == null)
                     z = "Error in connection with SQL server";
                 else
                 {
-                    String query = "Insert into users values ('" + enterdName + "','" + confirmPass + "',FALSE)";
+                    String query = "Exec sp_CreateUser '"+ enterdName +"', '" + enterdPass +"'";
                     Statement stmt = con.createStatement();
-                    stmt.executeQuery(query);
+                    stmt.execute(query);
+                    z = "Account Created";
+//                    stmt.executeQuery(query);
                 }
             }
             catch (Exception ex)
