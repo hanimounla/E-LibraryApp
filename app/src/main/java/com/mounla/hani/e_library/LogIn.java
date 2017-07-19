@@ -84,6 +84,7 @@ public class LogIn extends Activity
             userNameTB.setText(username);
             userPasswordTB.setText(upass);
             rememberMe.setChecked(true);
+            btnSignUp.setVisibility(View.GONE);
             if(!IPPref.isEmpty())
                 IPTB.setText(IPPref);
             else

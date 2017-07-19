@@ -95,8 +95,8 @@ public class SignUp extends Activity {
             if(z.equals("Account Created"))
             {
                 setRememberMeSettings();
-                startActivity(new Intent(SignUp.this,Main.class).putExtra("userName",enterdName));
                 finish();
+                startActivity(new Intent(SignUp.this,Main.class).putExtra("userName",enterdName));
             }
         }
         @Override
