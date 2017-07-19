@@ -1,6 +1,7 @@
 package com.mounla.hani.e_library;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -93,7 +94,9 @@ public class SignUp extends Activity {
             Toast.makeText(getApplicationContext(), z, Toast.LENGTH_SHORT).show();
             if(z.equals("Account Created"))
             {
-
+                setRememberMeSettings();
+                startActivity(new Intent(SignUp.this,Main.class).putExtra("userName",enterdName));
+                finish();
             }
         }
         @Override
