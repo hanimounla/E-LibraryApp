@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Navigate"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 </LinearLayout>

@@ -95,6 +95,9 @@ public class SignUp extends Activity {
             if(z.equals("Account Created"))
             {
                 setRememberMeSettings();
+                LogIn.LogInActivity.finish();
+//                Intent intent = getIntent();
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 finish();
                 startActivity(new Intent(SignUp.this,Main.class).putExtra("userName",enterdName));
             }
@@ -106,7 +109,7 @@ public class SignUp extends Activity {
             {
                 SharedPreferences pref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
                 String IPPref = pref.getString("ipAddress","");
-                if(IPPref == null)
+                if(IPPref.isEmpty());
                     IPPref = "202.202.202.202";
 
                 connectionClass = new ConnectionClass();

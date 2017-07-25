@@ -50,7 +50,7 @@ public class Main extends AppCompatActivity
 
         View navHeaderView = navigationView.getHeaderView(0);//navigationView.inflateHeaderView(R.layout.nav_header_main);
         userNameDrawerLBL = (TextView) navHeaderView.findViewById(R.id.userNameDrawerLBL);
-        userNameDrawerLBL.setText("Welcome " + userName + " :)");
+        userNameDrawerLBL.setText("Welcome " + userName);
 
         backGround = this.getWindow().getDecorView();
         backGround.setBackgroundColor(Color.DKGRAY);

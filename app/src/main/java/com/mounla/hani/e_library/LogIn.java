@@ -19,6 +19,7 @@ import java.sql.Statement;
 
 public class LogIn extends Activity
 {
+    public static Activity LogInActivity;
     ConnectionClass connectionClass;
     EditText userNameTB, userPasswordTB;
     Button btnlogin, btnSignUp;
@@ -37,6 +38,7 @@ public class LogIn extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+        LogInActivity = this;
 
         connectionClass = new ConnectionClass();
         userNameTB = (EditText) findViewById(R.id.userNameTB);
@@ -160,7 +162,7 @@ public class LogIn extends Activity
                         Result = "Error in connection with SQL server";
                     else
                     {
-                        String query = "select UserName , PassWord , SecurityLevel from Users where UserName = '" + enterdUserName + "' and password = '" + enterdPassword + "'";
+                        String query = "select UserName , PassWord , SecurityLevel from Users where UserName = '" + enterdUserName + "' and password = hashbytes('MD5','" + enterdPassword + "')";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         if(rs.next())
