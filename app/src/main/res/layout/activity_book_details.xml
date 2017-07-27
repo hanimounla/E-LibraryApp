@@ -132,13 +132,6 @@
          android:layout_height="wrap_content"
          android:layout_below="@id/details">
 
-         <Button
-             android:id="@+id/backBTN"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Back"
-             android:layout_alignParentTop="true"
-             android:layout_alignParentStart="true" />
 
          <Button
              android:id="@+id/downloadBTN"
@@ -146,7 +139,8 @@
              android:layout_height="wrap_content"
              android:text="Download"
              android:layout_alignParentTop="true"
-             android:layout_centerHorizontal="true" />
+             android:layout_alignParentStart="true"
+             android:layout_marginStart="30dp" />
 
          <Button
              android:id="@+id/openPdfBTN"
@@ -154,7 +148,8 @@
              android:layout_height="wrap_content"
              android:text="Open"
              android:layout_alignParentTop="true"
-             android:layout_alignParentEnd="true" />
+             android:layout_alignParentEnd="true"
+             android:layout_marginEnd="51dp" />
 
      </RelativeLayout>
 

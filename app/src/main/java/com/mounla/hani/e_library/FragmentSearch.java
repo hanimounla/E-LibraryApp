@@ -191,7 +191,7 @@ public class FragmentSearch extends Fragment
             String [] values = selected.split(", ");
             bookID =  Integer.parseInt(values[1].substring(2,values[1].length()-1));
         }
-        Toast.makeText(getActivity(),selected,Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(),selected,Toast.LENGTH_LONG).show();
         Intent i = new Intent(getActivity(),BookDetails.class);
         i.putExtra("ID",bookID + "");
 

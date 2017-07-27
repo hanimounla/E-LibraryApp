@@ -1,5 +1,6 @@
 package com.mounla.hani.e_library;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,13 +11,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -55,6 +59,13 @@ public class FragmentAuthors extends Fragment {
             }
         });
 
+        booksList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                openBookDetails(position);
+            }
+        });
+
 //        categoriesSpinner.setOnItemClickListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -74,10 +85,31 @@ public class FragmentAuthors extends Fragment {
         return rootView;
     }
 
+    private void openBookDetails(int position) {
+        String selected = booksList.getItemAtPosition(position).toString();
+        int bookID = 1;
+        try
+        {
+            String [] values = selected.split(" ");
+            bookID = Integer.parseInt(values[0].substring(3, values[0].length() - 1));
+        }
+        catch (Exception ex)
+        {
+            String [] values = selected.split(", ");
+            bookID =  Integer.parseInt(values[1].substring(2,values[1].length()-1));
+        }
+//        Toast.makeText(getActivity(),selected,Toast.LENGTH_LONG).show();
+        Intent i = new Intent(getActivity(),BookDetails.class);
+        i.putExtra("ID",bookID + "");
+
+        startActivity(i);
+
+    }
+
     private class FillCategoryBooks extends AsyncTask<String, String, String>
     {
         String z = "";
-        List<String> categoryBooks  = new ArrayList<String>();
+        List<Map<String, String>> SearchList  = new ArrayList<Map<String, String>>();
 
         @Override
         protected void onPreExecute()
@@ -90,11 +122,11 @@ public class FragmentAuthors extends Fragment {
         {
             progressBar.setVisibility(View.GONE);
 
-            String [] books = categoryBooks.toArray((new String[categoryBooks.size()]));
-            ArrayAdapter<String> booksArrayAdapter = new ArrayAdapter<String>(
-                    getActivity(), android.R.layout.select_dialog_item, books);
-            booksList.setAdapter(booksArrayAdapter);
-            totalBooks.setText("Total Books: " + booksList.getCount());
+            String[] from = {"A", "B"};
+            int[] views = { R.id.nameLBL, R.id.idLBL};
+            final SimpleAdapter ADA = new SimpleAdapter(getActivity(),
+                    SearchList, R.layout.my_list_layout, from,views);
+            booksList.setAdapter(ADA);
         }
 
         @Override
@@ -107,7 +139,7 @@ public class FragmentAuthors extends Fragment {
                     z = "Error in connection with SQL server";
                 } else
                 {
-                    String query = "select b.Title , a.Name , a.ID " +
+                    String query = "select b.Title ,b.ID " +
                             "from books b " +
                             "inner join BooksAuthors ba " +
                             "on b.ID = ba.BookID " +
@@ -120,7 +152,10 @@ public class FragmentAuthors extends Fragment {
 
                     while (rs.next())
                     {
-                        categoryBooks.add(rs.getString(1));
+                        Map<String, String> datanum = new HashMap<String, String>();
+                        datanum.put("A", rs.getString(0));
+                        datanum.put("B", rs.getString(1));
+                        SearchList.add(datanum);
                     }
                     z = "Success";
                 }

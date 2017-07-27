@@ -60,7 +60,6 @@ public class BookDetails extends AppCompatActivity {
         PagesCount = (EditText)findViewById(R.id.pagesCount);
         downloadBTN = (Button)findViewById(R.id.downloadBTN);
         openBtn = (Button)findViewById(R.id.openPdfBTN);
-        backBTN = (Button)findViewById(R.id.backBTN);
 
         downloadBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,10 +214,11 @@ public class BookDetails extends AppCompatActivity {
             coverPicIV.setImageBitmap(bmp);
 
 
-//            categoryTF.setEnabled(false);
-//            ISBNTF.setEnabled(false);
-//            YearTF.setEnabled(false);
-//            descriptionTF.setEnabled(false);
+            categoryTF.setEnabled(false);
+            ISBNTF.setEnabled(false);
+            YearTF.setEnabled(false);
+            descriptionTF.setEnabled(false);
+            PagesCount.setEnabled(false);
             Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();
         }
         @Override
