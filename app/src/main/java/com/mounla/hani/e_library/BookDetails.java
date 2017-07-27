@@ -9,7 +9,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +42,9 @@ public class BookDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         fmgr = getSupportFragmentManager();
         progressDialog = new FragmentProgressDialog();
@@ -94,6 +99,17 @@ public class BookDetails extends AppCompatActivity {
             }
         });
         checkBookExisting();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void checkBookExisting() {
@@ -214,7 +230,7 @@ public class BookDetails extends AppCompatActivity {
                 if (ConnectionClass.conn == null) {
                     z = "Error in connection with SQL server";
                 } else {
-                    String getBookByID = "Select b.Title , c.Name Category,b.ISBN, b.PublishDate ," +
+                    String getBookByID = "Select b.Title , c.Name Author,b.ISBN, b.PublishDate ," +
                             " b.Description, b.CoverPicture CoverPic, b.PagesCount from books b inner join categories c " +
                             "on b.categoryID = c.id where b.id = " + id;
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(getBookByID);
@@ -223,7 +239,7 @@ public class BookDetails extends AppCompatActivity {
                     while (rs.next())
                     {
                         Title = rs.getString("Title");
-                        Category = rs.getString("Category");
+                        Category = rs.getString("Author");
                         ISBN = rs.getString("ISBN");
                         date = rs.getString("PublishDate");
                         desc = rs.getString("Description");

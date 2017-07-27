@@ -26,7 +26,7 @@ import java.util.List;
 public class FragmentAuthors extends Fragment {
 
     Spinner categoriesSpinner;
-    String Category;
+    String Author;
     ListView booksList;
     ProgressBar progressBar;
     TextView totalBooks;
@@ -44,7 +44,7 @@ public class FragmentAuthors extends Fragment {
         categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Category = categoriesSpinner.getItemAtPosition(i).toString();
+                Author = categoriesSpinner.getItemAtPosition(i).toString();
                 FillCategoryBooks f = new FillCategoryBooks();
                 f.execute("");
             }
@@ -62,7 +62,7 @@ public class FragmentAuthors extends Fragment {
 //            }
 //        });
 
-        FillCategories f = new FillCategories();
+        FillAuthors f = new FillAuthors();
         f.execute();
 //        Spinner spn_label = (Spinner)rootView.findViewById(R.id.spinner_label);
 //        String[] items = new String[20];
@@ -107,8 +107,13 @@ public class FragmentAuthors extends Fragment {
                     z = "Error in connection with SQL server";
                 } else
                 {
-                    String query = "Select Title from Books b inner join categories c " +
-                            "on b.categoryId = c.id where c.name = '" + Category+"'";
+                    String query = "select b.Title , a.Name , a.ID " +
+                            "from books b " +
+                            "inner join BooksAuthors ba " +
+                            "on b.ID = ba.BookID " +
+                            "inner join Authors a " +
+                            "on a.ID = ba.AuthorID " +
+                            "where a.Name = '" + Author + "'";
 
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();
@@ -127,7 +132,7 @@ public class FragmentAuthors extends Fragment {
         }
     }
 
-    public class FillCategories extends AsyncTask<String, String, String>
+    public class FillAuthors extends AsyncTask<String, String, String>
     {
         String z = "";
 
@@ -160,7 +165,7 @@ public class FragmentAuthors extends Fragment {
                     z = "Error in connection with SQL server";
                 } else
                 {
-                    String query = "Select Name from Categories";
+                    String query = "Select Name from Authors";
 
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();

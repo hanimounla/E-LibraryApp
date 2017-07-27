@@ -176,6 +176,9 @@ public class Main extends AppCompatActivity
             case R.id.nav_about:
                 startActivity(new Intent(this, About.class));
                 return true;
+            case R.id.nav_exit:
+                finish();
+                return true;
 //            case R.id.nav_share : Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                startActivity(`i); break;
 
