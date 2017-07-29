@@ -39,6 +39,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".About"
                   android:screenOrientation="portrait"></activity>
+        <activity android:name=".AuthorDetails" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

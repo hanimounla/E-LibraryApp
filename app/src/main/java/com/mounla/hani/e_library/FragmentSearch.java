@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -122,7 +123,7 @@ public class FragmentSearch extends Fragment
                 {
                     case "Books": openBookDetails(position);break;
                     case "Categories": openBookFromCategory(position);break;
-                    case "Authors": openAuthorDetails(position);break;
+                    case "Authors": openAuthorDetails(view);break;
                     case "Publishers" : openPublisherDetails(position);break;
                     case "Data": openBooksPages(position);break;
                 }
@@ -169,8 +170,9 @@ public class FragmentSearch extends Fragment
 
     }
 
-    private void openAuthorDetails(int position) {
-
+    private void openAuthorDetails(View view) {
+        String selectedID = ((TextView)(view.findViewById(R.id.idLBL))).getText().toString();
+        startActivity(new Intent(getActivity(),AuthorDetails.class).putExtra("ID",selectedID));
     }
 
 

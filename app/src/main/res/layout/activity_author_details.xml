@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/image"
+        android:layout_below="@+id/authorImage"
         android:layout_alignParentEnd="true">
 
         <android.support.design.widget.TextInputLayout
@@ -30,10 +30,10 @@
             android:layout_height="wrap_content">
 
             <AutoCompleteTextView
-                android:id="@+id/categoryTF"
+                android:id="@+id/nationalityET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Category"
+                android:hint="Nationality"
                 android:inputType="text"
 
                 android:textColor="#000"
@@ -49,51 +49,12 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/ISBNTF"
+                android:id="@+id/BioET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="ISBN"
+                android:hint="Bio"
                 android:imeOptions="actionUnspecified"
                 android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/YearTF"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Publish date"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/DescriptionTB"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description"
-                android:imeOptions="actionUnspecified"
-                android:inputType="text"
-                android:lines="3"
                 android:maxLines="3"
                 android:singleLine="true"
                 android:textColor="#000"
@@ -101,19 +62,21 @@
                 android:textStyle="bold" />
 
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/pagesCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Pages count"
-                android:imeOptions="actionUnspecified"
-                android:textColor="#000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         </android.support.design.widget.TextInputLayout>
 
@@ -123,7 +86,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="350sp"
-        android:id="@+id/image"
+        android:id="@+id/authorImage"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -134,22 +97,13 @@
 
 
          <Button
-             android:id="@+id/downloadBTN"
-             android:layout_width="wrap_content"
+             android:id="@+id/viewBooksBTN"
+             android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="Download"
+             android:text="View Books"
+             android:gravity="center"
              android:layout_alignParentTop="true"
-             android:layout_alignParentStart="true"
-             android:layout_marginStart="30dp" />
-
-         <Button
-             android:id="@+id/openPdfBTN"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Open"
-             android:layout_alignParentTop="true"
-             android:layout_alignParentEnd="true"
-             android:layout_marginEnd="51dp" />
+             android:layout_centerHorizontal="true" />
 
      </RelativeLayout>
 
