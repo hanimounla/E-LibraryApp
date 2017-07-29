@@ -124,7 +124,7 @@ public class FragmentSearch extends Fragment
                     case "Books": openBookDetails(position);break;
                     case "Categories": openBookFromCategory(position);break;
                     case "Authors": openAuthorDetails(view);break;
-                    case "Publishers" : openPublisherDetails(position);break;
+                    case "Publishers" : openPublisherDetails(view);break;
                     case "Data": openBooksPages(position);break;
                 }
             }
@@ -166,8 +166,9 @@ public class FragmentSearch extends Fragment
     }
 
 
-    private void openPublisherDetails(int position) {
-
+    private void openPublisherDetails(View view) {
+        String selectedID = ((TextView)(view.findViewById(R.id.idLBL))).getText().toString();
+        startActivity(new Intent(getActivity(),PublisherDetails.class).putExtra("ID",selectedID));
     }
 
     private void openAuthorDetails(View view) {

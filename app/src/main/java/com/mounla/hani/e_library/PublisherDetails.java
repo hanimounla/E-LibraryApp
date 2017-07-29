@@ -16,10 +16,10 @@ import android.widget.Toast;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class AuthorDetails extends AppCompatActivity {
+public class PublisherDetails extends AppCompatActivity {
 
-    EditText NationalityET, BioET;
-    ImageView authorIV;
+    EditText AddressET, ContactET , DetailsTE;
+    ImageView PublisherIV;
     Button ViewBooksBTN;
     String id ;
     ConnectionClass connectionClass;
@@ -28,18 +28,19 @@ public class AuthorDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_author_details);
+        setContentView(R.layout.activity_publisher_details);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         id = getIntent().getStringExtra("ID");
-        getAuthorByID g = new getAuthorByID();
+        getPublisherByID g = new getPublisherByID();
         g.execute("");
 
-        NationalityET = (EditText) findViewById(R.id.nationalityET);
-        BioET = (EditText) findViewById(R.id.BioET);
-        authorIV = (ImageView) findViewById(R.id.authorImage);
+        AddressET = (EditText) findViewById(R.id.addressET);
+        ContactET = (EditText) findViewById(R.id.contactET);
+        PublisherIV = (ImageView) findViewById(R.id.publisherImage);
+        DetailsTE = (EditText) findViewById(R.id.detailsET);
         ViewBooksBTN = (Button)findViewById(R.id.viewBooksBTN);
 
         ViewBooksBTN.setOnClickListener(new View.OnClickListener() {
@@ -61,28 +62,30 @@ public class AuthorDetails extends AppCompatActivity {
     }
 
 
-    public class getAuthorByID extends AsyncTask<String, String, String>
+    public class getPublisherByID extends AsyncTask<String, String, String>
     {
-        String name , nationality , bio;
-        byte[] authorImage;
+        String name , address, contact , details;
+        byte[] publisherImage;
         String z = "";
 
         @Override
         protected void onPostExecute(String r)
         {
             setTitle(name);
-            NationalityET.setText(nationality);
-            BioET.setText(bio);
+            AddressET.setText(address);
+            ContactET.setText(contact);
+            DetailsTE.setText(details);
 
-            if(authorImage != null) {
-                Bitmap bmp = BitmapFactory.decodeByteArray(authorImage, 0, authorImage.length);
-                authorIV.setImageBitmap(bmp);
+            if(publisherImage != null) {
+                Bitmap bmp = BitmapFactory.decodeByteArray(publisherImage, 0, publisherImage.length);
+                PublisherIV.setImageBitmap(bmp);
             }
             else
-                authorIV.setImageResource(R.drawable.publisher);
+                PublisherIV.setImageResource(R.drawable.publisher);
 
-            NationalityET.setEnabled(false);
-            BioET.setEnabled(false);
+            AddressET.setEnabled(false);
+            ContactET.setEnabled(false);
+            DetailsTE.setEnabled(false);
             Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();
         }
         @Override
@@ -94,16 +97,17 @@ public class AuthorDetails extends AppCompatActivity {
                 if (ConnectionClass.conn == null) {
                     z = "Error in connection with SQL server";
                 } else {
-                    String getAuthorByID = "Select Name , Nationality , AuthorPicture , Bio from Authors where ID = " + id;
+                    String getAuthorByID = "Select Name , Address ,contact , details , PublisherPicture from Publishers where ID = " + id;
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(getAuthorByID);
                     ResultSet rs = ps.executeQuery();
 
                     while (rs.next())
                     {
                         name = rs.getString("Name");
-                        nationality = rs.getString("Nationality");
-                        bio = rs.getString("Bio");
-                        authorImage = rs.getBytes("AuthorPicture");
+                        address = rs.getString("Address");
+                        contact = rs.getString("contact");
+                        details = rs.getString("details");
+                        publisherImage = rs.getBytes("PublisherPicture");
                     }
                     z = "Success";
                 }
