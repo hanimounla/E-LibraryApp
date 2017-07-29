@@ -150,7 +150,7 @@ public class BookDetails extends AppCompatActivity {
                     String requets = "insert into BooksDownloadRequest values(" + id +" , getDate())";
                     PreparedStatement requestDownload = ConnectionClass.conn.prepareStatement(requets);
                     requestDownload.execute();
-                    Thread.sleep(10000);
+                    Thread.sleep(15000);
 
                     String getBookByteByID = "select pdFile from tempTable where bookid = " + id;
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(getBookByteByID);

@@ -144,7 +144,7 @@ public class Main extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
         String tag = "";
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         switch (id) {
             case R.id.nav_search:
                 setTitle("Search");
@@ -171,10 +171,10 @@ public class Main extends AppCompatActivity
                 fragment = new FragmentPublishers();
                 break;
             case R.id.nav_statistics:
-                startActivity(new Intent(this, Statistics.class));
+                startActivity(new Intent(this, Statistics.class)); drawer.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.nav_about:
-                startActivity(new Intent(this, About.class));
+                startActivity(new Intent(this, About.class));  drawer.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.nav_exit:
                 finish();
@@ -184,8 +184,6 @@ public class Main extends AppCompatActivity
 
         }
         loadFragment(fragment, tag);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
