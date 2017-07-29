@@ -181,7 +181,7 @@ public class AddBook extends Activity
 
         private void fillCategories(Connection conn) throws SQLException
         {
-            String categoriesQuery = "select * from Categories";
+            String categoriesQuery = "select * from Authors";
             PreparedStatement ps = conn.prepareStatement(categoriesQuery);
             ResultSet rs = ps.executeQuery();
             while (rs.next())

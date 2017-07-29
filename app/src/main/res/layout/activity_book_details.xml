@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:scrollbarStyle="outsideOverlay"
-    android:background="#535353"
+    android:background="#9f9f9f"
     >
  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -36,7 +36,7 @@
                 android:hint="Category"
                 android:inputType="text"
 
-                android:textColor="#FFF"
+                android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="#FFF"
+                android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -76,7 +76,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="#FFF"
+                android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
                 android:lines="3"
                 android:maxLines="3"
                 android:singleLine="true"
-                android:textColor="#FFF"
+                android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Pages count"
                 android:imeOptions="actionUnspecified"
-                android:textColor="#FFF"
+                android:textColor="#000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

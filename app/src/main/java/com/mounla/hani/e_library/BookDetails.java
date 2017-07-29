@@ -90,13 +90,6 @@ public class BookDetails extends AppCompatActivity {
                 }
             }
         });
-
-        backBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         checkBookExisting();
     }
     @Override
@@ -230,7 +223,7 @@ public class BookDetails extends AppCompatActivity {
                 if (ConnectionClass.conn == null) {
                     z = "Error in connection with SQL server";
                 } else {
-                    String getBookByID = "Select b.Title , c.Name Author,b.ISBN, b.PublishDate ," +
+                    String getBookByID = "Select b.Title , c.Name Category,b.ISBN, b.PublishDate ," +
                             " b.Description, b.CoverPicture CoverPic, b.PagesCount from books b inner join categories c " +
                             "on b.categoryID = c.id where b.id = " + id;
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(getBookByID);
@@ -239,7 +232,7 @@ public class BookDetails extends AppCompatActivity {
                     while (rs.next())
                     {
                         Title = rs.getString("Title");
-                        Category = rs.getString("Author");
+                        Category = rs.getString("Category");
                         ISBN = rs.getString("ISBN");
                         date = rs.getString("PublishDate");
                         desc = rs.getString("Description");

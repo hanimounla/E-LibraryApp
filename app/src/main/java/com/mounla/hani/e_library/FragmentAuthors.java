@@ -127,6 +127,7 @@ public class FragmentAuthors extends Fragment {
             final SimpleAdapter ADA = new SimpleAdapter(getActivity(),
                     SearchList, R.layout.my_list_layout, from,views);
             booksList.setAdapter(ADA);
+            totalBooks.setText("Total Books: " + booksList.getCount());
         }
 
         @Override
@@ -153,8 +154,8 @@ public class FragmentAuthors extends Fragment {
                     while (rs.next())
                     {
                         Map<String, String> datanum = new HashMap<String, String>();
-                        datanum.put("A", rs.getString(0));
-                        datanum.put("B", rs.getString(1));
+                        datanum.put("A", rs.getString(1));
+                        datanum.put("B", rs.getString(2));
                         SearchList.add(datanum);
                     }
                     z = "Success";
@@ -171,7 +172,7 @@ public class FragmentAuthors extends Fragment {
     {
         String z = "";
 
-        List<String> Categories = new ArrayList<>();
+        List<String> Authors = new ArrayList<>();
 
         @Override
         protected void onPreExecute()
@@ -182,7 +183,7 @@ public class FragmentAuthors extends Fragment {
         protected void onPostExecute(String r)
         {
 
-            String[] wee = Categories.toArray(new String[Categories.size()]);
+            String[] wee = Authors.toArray(new String[Authors.size()]);
             ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
                     getActivity(), android.R.layout.simple_spinner_item, wee);
             spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
@@ -207,7 +208,7 @@ public class FragmentAuthors extends Fragment {
 
                     while (rs.next())
                     {
-                        Categories.add(rs.getString(1));
+                        Authors.add(rs.getString(1));
                     }
                     z = "Success";
                 }
@@ -218,8 +219,4 @@ public class FragmentAuthors extends Fragment {
             return z;
         }
     }
-
-
-
-
 }
