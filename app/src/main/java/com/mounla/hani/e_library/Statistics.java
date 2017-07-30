@@ -73,11 +73,11 @@ public class Statistics extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r)
         {
-            List<Integer> colors = new ArrayList<>();
-            colors.add(450);colors.add(300);
-            colors.add(200);colors.add(654);
-            colors.add(988);colors.add(123);
-            colors.add(433);
+//            List<Integer> colors = new ArrayList<>();
+//            colors.add(450);colors.add(300);
+//            colors.add(200);colors.add(654);
+//            colors.add(988);colors.add(123);
+//            colors.add(433);
 
 
             List<PieEntry> pieEntries = new ArrayList<>();
@@ -92,10 +92,11 @@ public class Statistics extends AppCompatActivity {
             pieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
             PieData pieData = new PieData(pieDataSet);
             pieChart.setData(pieData);
+
             pieChart.invalidate();
 
-            BarDataSet barDataSet = new BarDataSet(barEntries, "BarDataSet");
-            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            BarDataSet barDataSet = new BarDataSet(barEntries, "Categories");
+            barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
             BarData barData = new BarData(barDataSet);
             barData.setBarWidth(0.5f); // set custom bar width
             barChart.setData(barData);

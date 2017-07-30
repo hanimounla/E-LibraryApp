@@ -49,7 +49,7 @@ public class FragmentAuthors extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Author = categoriesSpinner.getItemAtPosition(i).toString();
-                FillCategoryBooks f = new FillCategoryBooks();
+                FillAuthorBooks f = new FillAuthorBooks();
                 f.execute("");
             }
 
@@ -106,7 +106,7 @@ public class FragmentAuthors extends Fragment {
 
     }
 
-    private class FillCategoryBooks extends AsyncTask<String, String, String>
+    private class FillAuthorBooks extends AsyncTask<String, String, String>
     {
         String z = "";
         List<Map<String, String>> SearchList  = new ArrayList<Map<String, String>>();

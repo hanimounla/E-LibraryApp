@@ -80,6 +80,8 @@ public class Main extends AppCompatActivity
                 if (currentFragment.getTag().equals("search") || currentFragment.getTag().equals("categories")||
                     currentFragment.getTag().equals("authors") || currentFragment.getTag().equals("publishers"))
                  {
+                     if(currentFragment.getTag().equals("search"))
+                         setTitle("Search");
                     Toast.makeText(this, "Press back once more to exit.",
                             Toast.LENGTH_SHORT).show();
                     exit = true;
@@ -89,8 +91,13 @@ public class Main extends AppCompatActivity
                             exit = false;
                         }
                     }, 2 * 1000);
-                } else
+                } else {
                     getSupportFragmentManager().popBackStack();
+                    currentFragment = fragmentManager.findFragmentById(R.id.mainFrame);
+                    String hani = currentFragment.getTag();
+                    if(hani.equals("searchPage"))
+                        setTitle("Search");
+                }
             }
         }
     }
@@ -152,7 +159,7 @@ public class Main extends AppCompatActivity
                 fragment = new FragmentSearch();
                 break;
             case R.id.nav_books:
-                openBooksDirectory();
+                openBooksDirectory(); drawer.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.nav_categories:
 
@@ -191,7 +198,7 @@ public class Main extends AppCompatActivity
     private void openBooksDirectory() {
         Uri booksDirectory = Uri.parse(Environment.getExternalStorageDirectory().toString() + "/eLibraryPDFs");
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setDataAndType(booksDirectory, "resource/folder");
+        i.setDataAndType(booksDirectory, "folder");
         try {
             startActivity(i);
         } catch (ActivityNotFoundException anfe) {

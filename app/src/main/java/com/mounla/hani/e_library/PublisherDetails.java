@@ -1,5 +1,6 @@
 package com.mounla.hani.e_library;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -45,6 +46,7 @@ public class PublisherDetails extends AppCompatActivity {
 
         ViewBooksBTN.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),BooksCategories.class).putExtra("PublisherID",id));
             }
         });
 
@@ -86,7 +88,7 @@ public class PublisherDetails extends AppCompatActivity {
             AddressET.setEnabled(false);
             ContactET.setEnabled(false);
             DetailsTE.setEnabled(false);
-            Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();
         }
         @Override
         protected String doInBackground(String... strings)

@@ -47,14 +47,15 @@
         android:layout_below="@+id/spinners" />
 
     <Button
+        android:id="@+id/searchBTN"
         android:layout_width="50sp"
         android:layout_height="50sp"
-        android:id="@+id/searchBTN"
-        android:background="@android:drawable/ic_menu_search"
-        android:textColor="#ffffff"
-        android:onClick="SearchBTN_Click"
         android:layout_alignTop="@+id/btnSpeak"
-        android:layout_toStartOf="@+id/btnSpeak" />
+        android:layout_toStartOf="@+id/btnSpeak"
+        android:background="@android:drawable/ic_menu_search"
+        android:onClick="SearchBTN_Click"
+        android:textColor="#ffffff"
+        android:visibility="invisible" />
     <Button
         android:layout_width="50sp"
         android:layout_height="50sp"

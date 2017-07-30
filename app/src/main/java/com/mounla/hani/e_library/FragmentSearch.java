@@ -8,6 +8,8 @@ import android.speech.RecognizerIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +78,26 @@ public class FragmentSearch extends Fragment
             }
         });
 
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(table != "Data") {
+                    DoSearch d = new DoSearch();
+                    d.execute("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         tableSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
@@ -83,13 +105,13 @@ public class FragmentSearch extends Fragment
                 int tableindex = tableSpinner.getSelectedItemPosition();
                 switch (tableindex)
                 {
-                    case 0: fillBook(); table = "Books";
+                    case 0: fillBook(); table = "Books"; searchBTN.setVisibility(View.INVISIBLE);
                         break;
-                    case 1: fillAuthor(); table = "Authors";
+                    case 1: fillAuthor(); table = "Authors"; searchBTN.setVisibility(View.INVISIBLE);
                         break;
-                    case 2: fillPubllisher(); table = "Publishers";
+                    case 2: fillPubllisher(); table = "Publishers"; searchBTN.setVisibility(View.INVISIBLE);
                         break;
-                    case 3 : fillSearch(); table = "Data";
+                    case 3 : fillSearch(); table = "Data"; searchBTN.setVisibility(View.VISIBLE);
                     default:
                         break;
                 }
@@ -125,7 +147,7 @@ public class FragmentSearch extends Fragment
                     case "Categories": openBookFromCategory(position);break;
                     case "Authors": openAuthorDetails(view);break;
                     case "Publishers" : openPublisherDetails(view);break;
-                    case "Data": openBooksPages(position);break;
+                    case "Data": openBooksPages(view);break;
                 }
             }
         });
@@ -141,25 +163,14 @@ public class FragmentSearch extends Fragment
         return rootView;
     }
 
-    private void openBooksPages(int position) {
-        String selected = searchResultList.getItemAtPosition(position).toString();
-        int bookID ;
-        String [] values;
-        try
-        {
-            values = selected.split(" ");
-            bookID = Integer.parseInt(values[0].substring(3, values[0].length() - 1));
-        }
-        catch (Exception ex)
-        {
-            values = selected.split(", ");
-            bookID =  Integer.parseInt(values[1].substring(2,values[1].length() - 1));
-        }
+    private void openBooksPages(View view) {
+        String selectedTitle = ((TextView)(view.findViewById(R.id.nameLBL))).getText().toString();
+        String selectedID = ((TextView)(view.findViewById(R.id.idLBL))).getText().toString();
 
-        getActivity().setTitle(values[0].substring(3, values[0].length() - 1));
+        getActivity().setTitle(selectedTitle);
         FragmentManager fragMgr = getActivity().getSupportFragmentManager();
         FragmentTransaction fragTrans = fragMgr.beginTransaction();
-        fragTrans.replace(R.id.mainFrame, new FragmentSearchPages(bookID, searchFor) , "searchPage");
+        fragTrans.replace(R.id.mainFrame, new FragmentSearchPages(Integer.parseInt(selectedID), searchFor) , "searchPage");
         fragTrans.addToBackStack(null);
         fragTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragTrans.commit();
@@ -228,7 +239,9 @@ public class FragmentSearch extends Fragment
         PubllisherAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         columnSpinner.setAdapter(PubllisherAdapter);
         PubllisherAdapter.add("Name");
-        PubllisherAdapter.add("City");
+        PubllisherAdapter.add("Address");
+        PubllisherAdapter.add("Details");
+
     }
     private void fillSearch()
     {
@@ -287,7 +300,7 @@ public class FragmentSearch extends Fragment
         {
 
             pbbar.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), r, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), r, Toast.LENGTH_SHORT).show();
 
             String[] from = {"A", "B"};
             int[] views = { R.id.nameLBL, R.id.idLBL};

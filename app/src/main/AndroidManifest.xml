@@ -41,6 +41,7 @@
                   android:screenOrientation="portrait"></activity>
         <activity android:name=".AuthorDetails" android:screenOrientation="portrait"/>
         <activity android:name=".PublisherDetails" android:screenOrientation="portrait"/>
+        <activity android:name=".BooksCategories" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

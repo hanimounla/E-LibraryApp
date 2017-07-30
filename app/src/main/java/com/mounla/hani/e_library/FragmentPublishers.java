@@ -114,7 +114,6 @@ public class FragmentPublishers extends Fragment {
         protected void onPreExecute()
         {
             progressBar.setVisibility(View.VISIBLE);
-
         }
         @Override
         protected void onPostExecute(String r)

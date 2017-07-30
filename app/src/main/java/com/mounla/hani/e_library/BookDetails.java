@@ -30,7 +30,7 @@ public class BookDetails extends AppCompatActivity {
     ImageView coverPicIV;
     String Title;
     File pdfFile;
-    Button downloadBTN , openBtn , backBTN;
+    Button downloadBTN , openBtn;
     byte [] pdfFileBytes;
     String id;
     ConnectionClass connectionClass;
@@ -212,7 +212,7 @@ public class BookDetails extends AppCompatActivity {
             YearTF.setEnabled(false);
             descriptionTF.setEnabled(false);
             PagesCount.setEnabled(false);
-            Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();
         }
         @Override
         protected String doInBackground(String... strings)
