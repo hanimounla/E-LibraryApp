@@ -45,7 +45,7 @@ public class AuthorDetails extends AppCompatActivity {
 
         ViewBooksBTN.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),BooksCategories.class).putExtra("AuthorID",id));
+                startActivity(new Intent(getApplicationContext(),BooksCategories.class).putExtra("AuthorID",id).putExtra("AuthorName",getTitle()));
             }
         });
 

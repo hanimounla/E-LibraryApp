@@ -55,7 +55,7 @@
         android:background="@android:drawable/ic_menu_search"
         android:onClick="SearchBTN_Click"
         android:textColor="#ffffff"
-        android:visibility="invisible" />
+        android:visibility="gone" />
     <Button
         android:layout_width="50sp"
         android:layout_height="50sp"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/progressBar"
-        android:layout_below="@+id/searchBTN"
+        android:layout_below="@+id/btnSpeak"
         android:layout_centerHorizontal="true"
         />
 

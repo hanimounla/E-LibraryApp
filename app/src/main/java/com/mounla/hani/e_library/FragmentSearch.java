@@ -105,13 +105,13 @@ public class FragmentSearch extends Fragment
                 int tableindex = tableSpinner.getSelectedItemPosition();
                 switch (tableindex)
                 {
-                    case 0: fillBook(); table = "Books"; searchBTN.setVisibility(View.INVISIBLE);
+                    case 0: fillBook(); table = "Books"; searchBTN.setVisibility(View.GONE);
                         break;
-                    case 1: fillAuthor(); table = "Authors"; searchBTN.setVisibility(View.INVISIBLE);
+                    case 1: fillAuthor(); table = "Authors"; searchBTN.setVisibility(View.GONE);
                         break;
-                    case 2: fillPubllisher(); table = "Publishers"; searchBTN.setVisibility(View.INVISIBLE);
+                    case 2: fillPubllisher(); table = "Publishers"; searchBTN.setVisibility(View.GONE);
                         break;
-                    case 3 : fillSearch(); table = "Data"; searchBTN.setVisibility(View.VISIBLE);
+                    case 3 : fillSearch(); table = "Data"; searchBTN.setVisibility(View.GONE);
                     default:
                         break;
                 }
@@ -143,8 +143,7 @@ public class FragmentSearch extends Fragment
             {
                 switch (table)
                 {
-                    case "Books": openBookDetails(position);break;
-                    case "Categories": openBookFromCategory(position);break;
+                    case "Books": openBookDetails(view);break;
                     case "Authors": openAuthorDetails(view);break;
                     case "Publishers" : openPublisherDetails(view);break;
                     case "Data": openBooksPages(view);break;
@@ -187,29 +186,9 @@ public class FragmentSearch extends Fragment
         startActivity(new Intent(getActivity(),AuthorDetails.class).putExtra("ID",selectedID));
     }
 
-
-    private void openBookFromCategory(int position) {
-
-    }
-
-    private void openBookDetails(int position) {
-        String selected = searchResultList.getItemAtPosition(position).toString();
-        int bookID = 1;
-        try
-        {
-            String [] values = selected.split(" ");
-            bookID = Integer.parseInt(values[0].substring(3, values[0].length() - 1));
-        }
-        catch (Exception ex)
-        {
-            String [] values = selected.split(", ");
-            bookID =  Integer.parseInt(values[1].substring(2,values[1].length()-1));
-        }
-//        Toast.makeText(getActivity(),selected,Toast.LENGTH_LONG).show();
-        Intent i = new Intent(getActivity(),BookDetails.class);
-        i.putExtra("ID",bookID + "");
-
-        startActivity(i);
+    private void openBookDetails(View view) {
+        String selectedID = ((TextView)(view.findViewById(R.id.idLBL))).getText().toString();
+        startActivity(new Intent(getActivity(),AuthorDetails.class).putExtra("ID",selectedID));
 
     }
 
