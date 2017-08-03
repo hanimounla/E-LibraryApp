@@ -80,8 +80,6 @@ public class Main extends AppCompatActivity
                 if (currentFragment.getTag().equals("search") || currentFragment.getTag().equals("categories")||
                     currentFragment.getTag().equals("authors") || currentFragment.getTag().equals("publishers"))
                  {
-                     if(currentFragment.getTag().equals("search"))
-                         setTitle("Search");
                     Toast.makeText(this, "Press back once more to exit.",
                             Toast.LENGTH_SHORT).show();
                     exit = true;

@@ -111,7 +111,7 @@ public class FragmentSearch extends Fragment
                         break;
                     case 2: fillPubllisher(); table = "Publishers"; searchBTN.setVisibility(View.GONE);
                         break;
-                    case 3 : fillSearch(); table = "Data"; searchBTN.setVisibility(View.GONE);
+                    case 3 : fillSearch(); table = "Data"; searchBTN.setVisibility(View.VISIBLE);
                     default:
                         break;
                 }
@@ -188,7 +188,7 @@ public class FragmentSearch extends Fragment
 
     private void openBookDetails(View view) {
         String selectedID = ((TextView)(view.findViewById(R.id.idLBL))).getText().toString();
-        startActivity(new Intent(getActivity(),AuthorDetails.class).putExtra("ID",selectedID));
+        startActivity(new Intent(getActivity(),BookDetails.class).putExtra("ID",selectedID));
 
     }
 

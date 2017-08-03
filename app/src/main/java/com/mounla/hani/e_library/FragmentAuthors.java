@@ -115,17 +115,16 @@ public class FragmentAuthors extends Fragment {
         protected void onPreExecute()
         {
             progressBar.setVisibility(View.VISIBLE);
-
         }
         @Override
         protected void onPostExecute(String r)
         {
             progressBar.setVisibility(View.GONE);
 
-            String[] from = {"A", "B"};
-            int[] views = { R.id.nameLBL, R.id.idLBL};
+            String[] from = {"A", "B","C"};
+            int[] views = { R.id.bookTitle, R.id.bookID , R.id.BookCategory};
             final SimpleAdapter ADA = new SimpleAdapter(getActivity(),
-                    SearchList, R.layout.my_list_layout, from,views);
+                    SearchList, R.layout.my_list_layout_2, from,views);
             booksList.setAdapter(ADA);
             totalBooks.setText("Total Books: " + booksList.getCount());
         }
@@ -156,6 +155,7 @@ public class FragmentAuthors extends Fragment {
                         Map<String, String> datanum = new HashMap<String, String>();
                         datanum.put("A", rs.getString(1));
                         datanum.put("B", rs.getString(2));
+                        datanum.put("C", "Hani");
                         SearchList.add(datanum);
                     }
                     z = "Success";

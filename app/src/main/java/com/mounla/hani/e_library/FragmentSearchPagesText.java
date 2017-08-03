@@ -84,7 +84,7 @@ public class FragmentSearchPagesText  extends Fragment {
                             "on b.ID = d.BookID " +
                             "where b.id = "+ bookId +" and d.pageId = " + PageId + " and d.Text like N'%" + searchFor + "%' " +
                             "union " +
-                            "select pd.Text " +
+                            "select 'Image : ' + pd.Text " +
                             "from books b inner join PicturesData pd " +
                             "on b.ID = pd.BookID " +
                             "where b.id = "+ bookId +" and pd.pageId = " + PageId + " and pd.text like N'%" + searchFor + "%' ";
