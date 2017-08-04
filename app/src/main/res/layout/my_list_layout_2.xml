@@ -3,22 +3,26 @@
 <TwoLineListItem xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/listPreferredItemHeight"
     android:mode="twoLine"
+    android:minHeight="30sp"
     >
 
     <TextView android:id="@+id/bookTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="23sp"
+        android:text="Primary"
         android:layout_alignParentTop="true"
+        android:textColor="#000"
         android:layout_alignParentStart="true" />
 
     <TextView android:id="@+id/BookCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#292929"
+
         android:layout_below="@id/bookTitle"
+        android:text="Secondary"
         android:layout_alignStart="@id/bookTitle"
         android:textSize="15sp"
         android:layout_alignLeft="@id/bookTitle" />
@@ -26,7 +30,5 @@
     <TextView android:id="@+id/bookID"
         android:layout_width="0sp"
         android:layout_height="0sp"
-        android:layout_below="@id/bookTitle"
-        android:layout_alignStart="@id/bookTitle"
-        android:layout_alignLeft="@id/bookTitle" />
+         />
 </TwoLineListItem>

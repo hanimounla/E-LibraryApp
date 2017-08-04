@@ -46,7 +46,7 @@ public class PublisherDetails extends AppCompatActivity {
 
         ViewBooksBTN.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),BooksCategories.class).putExtra("PublisherID",id));
+                startActivity(new Intent(getApplicationContext(),Books.class).putExtra("PublisherID",id).putExtra("PublisherName",getTitle()));
             }
         });
 
@@ -55,7 +55,6 @@ public class PublisherDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; go home
                 finish();
                 return true;
             default:

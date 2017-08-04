@@ -1,19 +1,28 @@
 package com.mounla.hani.e_library;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.sql.PreparedStatement;
@@ -79,8 +88,7 @@ public class Statistics extends AppCompatActivity {
 //            colors.add(988);colors.add(123);
 //            colors.add(433);
 
-
-            List<PieEntry> pieEntries = new ArrayList<>();
+            final List<PieEntry> pieEntries = new ArrayList<>();
             List<BarEntry> barEntries = new ArrayList<>();
             int i =1;
             for (Map<String,String> category: Categories)
@@ -90,10 +98,28 @@ public class Statistics extends AppCompatActivity {
             }
             PieDataSet pieDataSet = new PieDataSet(pieEntries, "Categories");
             pieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-            PieData pieData = new PieData(pieDataSet);
+            final PieData pieData = new PieData(pieDataSet);
             pieChart.setData(pieData);
 
+            Description d = new Description();
+            d.setText("Categories and thier books count");
+            pieChart.setDescription(d);
             pieChart.invalidate();
+            pieChart.setTouchEnabled(true);
+
+            pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+                @Override
+                public void onValueSelected(Entry e, Highlight h) {
+                    PieEntry p = (PieEntry)e;
+
+                    startActivity(new Intent(getApplicationContext(),Books.class).putExtra("category",p.getLabel()));
+                }
+
+                @Override
+                public void onNothingSelected() {
+
+                }
+            });
 
             BarDataSet barDataSet = new BarDataSet(barEntries, "Categories");
             barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
