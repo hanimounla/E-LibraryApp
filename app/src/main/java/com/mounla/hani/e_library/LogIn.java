@@ -40,6 +40,8 @@ public class LogIn extends Activity
         setContentView(R.layout.activity_log_in);
         LogInActivity = this;
 
+
+
         connectionClass = new ConnectionClass();
         userNameTB = (EditText) findViewById(R.id.userNameTB);
         userPasswordTB = (EditText) findViewById(R.id.userPasswordTB);
@@ -57,7 +59,7 @@ public class LogIn extends Activity
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LogIn.this,SignUp.class));
+                startActivity(new Intent(LogIn.this,SignUp.class).putExtra("IP",IPTB.getText().toString()));
             }
         });
 
@@ -130,12 +132,16 @@ public class LogIn extends Activity
         protected void onPreExecute()
         {
             pbbar.setVisibility(View.VISIBLE);
+            btnSignUp.setEnabled(false);
+            btnlogin.setEnabled(false);
         }
 
         @Override
         protected void onPostExecute(String r)
         {
             pbbar.setVisibility(View.GONE);
+            btnSignUp.setEnabled(true);
+            btnlogin.setEnabled(true);
             Toast.makeText(LogIn.this,r,Toast.LENGTH_SHORT).show();
 
             if(isSuccess)

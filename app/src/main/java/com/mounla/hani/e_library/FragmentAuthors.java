@@ -145,7 +145,7 @@ public class FragmentAuthors extends Fragment {
                             "on b.ID = ba.BookID " +
                             "inner join Authors a " +
                             "on a.ID = ba.AuthorID " +
-                            "where a.Name = '" + Author + "'";
+                            "where a.Name = N'" + Author + "'";
 
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();

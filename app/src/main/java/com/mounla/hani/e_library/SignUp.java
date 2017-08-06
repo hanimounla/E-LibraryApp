@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.rey.material.widget.CheckBox;
@@ -20,6 +21,7 @@ public class SignUp extends Activity {
     ConnectionClass connectionClass;
     EditText userNameTB, userPasswordTB , confirmPassTB;
     Button btnSignUp;
+    ProgressBar pbbar;
     CheckBox rememberMe;
     public static final String PREFS_NAME = "MyPrefsFile";
     public String PREFS_USERNAME= "prefsUsername";
@@ -31,6 +33,7 @@ public class SignUp extends Activity {
     String enterdName;
     String enterdPass;
     String confirmPass;
+    String IpAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,19 @@ public class SignUp extends Activity {
         setTitle("Sign Up to E-Library");
         pref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
+        IpAddress = getIntent().getStringExtra("IP");
+
         connectionClass = new ConnectionClass();
 
         userNameTB = (EditText) findViewById(R.id.UserNameTB);
         userPasswordTB = (EditText) findViewById(R.id.PasswordTB);
         confirmPassTB = (EditText) findViewById(R.id.confirmPass);
         rememberMe = (CheckBox)findViewById(R.id.rememberMeCB);
+        pbbar = (ProgressBar) findViewById(R.id.pbbar);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
+
+        pbbar.setVisibility(View.GONE);
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,14 +91,25 @@ public class SignUp extends Activity {
                 .putString(PREFS_USERNAME, passwordInString)
                 .putString(PREFS_PASSWORD, userNameInString)
                 .putBoolean(PREFS_SAVED, rememberMe.isChecked())
+                .putString(PREFS_IP,IpAddress)
                 .commit();
     }
 
     private class DoSignUp extends AsyncTask<String,String,String>
     {
         String z  = "";
+
+        @Override
+        protected void onPreExecute()
+        {
+            pbbar.setVisibility(View.VISIBLE);
+            btnSignUp.setEnabled(false);
+        }
         @Override
         protected void onPostExecute(String z){
+
+            pbbar.setVisibility(View.GONE);
+            btnSignUp.setEnabled(true);
 
             Toast.makeText(getApplicationContext(), z, Toast.LENGTH_SHORT).show();
             if(z.equals("Account Created"))
@@ -107,13 +127,8 @@ public class SignUp extends Activity {
 
             try
             {
-                SharedPreferences pref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-                String IPPref = pref.getString("ipAddress","");
-                if(IPPref.isEmpty());
-                    IPPref = "202.202.202.202";
-
                 connectionClass = new ConnectionClass();
-                Connection con = connectionClass.CONN(IPPref);
+                Connection con = connectionClass.CONN(IpAddress);
                 if (ConnectionClass.conn == null)
                     z = "Error in connection with SQL server";
                 else

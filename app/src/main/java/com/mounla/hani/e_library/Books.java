@@ -2,6 +2,7 @@ package com.mounla.hani.e_library;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompatSideChannelService;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -83,22 +84,13 @@ public class Books extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String r) {
-            progressBar.setVisibility(View.GONE);
 
-            if (Category != null) {
-                String[] from = {"A", "B", "C"};
-                int[] views = {R.id.bookTitle, R.id.bookID, R.id.BookCategory};
-                final SimpleAdapter ADA = new SimpleAdapter(getApplicationContext(),
-                        SearchList, R.layout.my_list_layout_2, from, views);
-                BooksCategoriesList.setAdapter(ADA);
-            }else
-            {
-                String[] from = {"A", "B"};
-                int[] views = {R.id.bookTitle, R.id.bookID};
-                final SimpleAdapter ADA = new SimpleAdapter(getApplicationContext(),
-                        SearchList, R.layout.my_list_layout, from, views);
-                BooksCategoriesList.setAdapter(ADA);
-            }
+            progressBar.setVisibility(View.GONE);
+            String[] from = {"A", "B", "C"};
+            int[] views = {R.id.bookTitle, R.id.bookID, R.id.BookCategory};
+            final SimpleAdapter ADA = new SimpleAdapter(getApplicationContext(),
+                    SearchList, R.layout.my_list_layout_2, from, views);
+            BooksCategoriesList.setAdapter(ADA);
         }
 
         @Override
@@ -128,11 +120,13 @@ public class Books extends AppCompatActivity {
                                 "on b.categoryID = c.id " +
                                 "where p.id = " + PublisherID + "";
                     else
-                        query = "select b.title , b.id " +
+                        query = "select b.title , b.id , p.name " +
                                 "from books b " +
                                 "inner join categories c " +
                                 "on b.categoryId = c.id " +
-                                "where c.name = '" + Category + "'";
+                                "inner join publishers p " +
+                                "on b.publisherid = p.id " +
+                                "where c.name = N'" + Category + "'";
 
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();
@@ -144,6 +138,7 @@ public class Books extends AppCompatActivity {
                         datanum.put("C", rs.getString(3));
                         SearchList.add(datanum);
                     }
+
                     z = "Success";
                 }
             } catch (Exception ex) {

@@ -139,7 +139,7 @@ public class FragmentPublishers extends Fragment {
                 } else
                 {
                     String query = "Select Title , b.id from Books b inner join Publishers c " +
-                            "on b.PublisherId = c.id where c.name = '" + Publisher+"'";
+                            "on b.PublisherId = c.id where c.name = N'" + Publisher+"'";
 
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();

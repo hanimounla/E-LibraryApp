@@ -145,7 +145,7 @@ public class FragmentCategories extends Fragment {
                 } else
                 {
                     String query = "Select Title, b.id from Books b inner join categories c " +
-                            "on b.categoryId = c.id where c.name = '" + Category+"'";
+                            "on b.categoryId = c.id where c.name = N'" + Category+"'";
 
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();
