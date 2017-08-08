@@ -123,16 +123,19 @@ public class Statistics extends AppCompatActivity {
                 if(Integer.parseInt(category.get("TotalBooks")) != 0 )
                     pieEntries.add(new PieEntry(Float.parseFloat(category.get("TotalBooks")), category.get("Name")));
             }
-            PieDataSet pieDataSet = new PieDataSet(pieEntries, "Categories");
+            PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
             pieDataSet.setColors(colors);
             final PieData pieData = new PieData(pieDataSet);
 
             pieChart.setData(pieData);
             pieChart.setCenterText("Pie Chart");
+            pieChart.setEntryLabelTextSize(0);
+
 
 
             Legend l = pieChart.getLegend();
-            l.setEnabled(false);
+            l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+            l.setForm(Legend.LegendForm.CIRCLE);
 
             Description d = pieChart.getDescription();
             d.setEnabled(false);
