@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">eLSE</string>
+    <string name="app_name">ESE</string>
     <string name="title_activity_main">Main</string>
     <string name="action_settings">Speech</string>
     <string name="section_format">Hello World from section: %1$d</string>
