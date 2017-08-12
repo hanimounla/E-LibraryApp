@@ -62,6 +62,15 @@
         android:id="@+id/btnSpeak"
         android:layout_gravity="right|top"
         android:background="@android:drawable/ic_btn_speak_now"
+        android:layout_marginEnd="1dp"
+        android:layout_below="@+id/spinners"
+        android:layout_toStartOf="@+id/btnArabic" />
+    <Button
+        android:id="@+id/btnArabic"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:background="#fff"
+        android:text="AR"
         android:layout_alignTop="@+id/searchET"
         android:layout_alignParentEnd="true" />
 

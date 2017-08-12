@@ -2,6 +2,7 @@ package com.mounla.hani.e_library;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -41,11 +42,12 @@ public class FragmentSearch extends Fragment
     ConnectionClass connectionClass;
     String table = "" , column = "";
     Spinner tableSpinner , columnSpinner;
-    Button searchBTN;
+    Button searchBTN , arabicBTN;
     EditText searchET;
     String searchFor;
     ProgressBar pbbar;
     ListView searchResultList;
+    Boolean arabic= false;
 
     private Button btnSpeak;
     private final int REQ_CODE_SPEECH_INPUT = 100;
@@ -57,6 +59,7 @@ public class FragmentSearch extends Fragment
         columnSpinner = (Spinner)rootView.findViewById(R.id.colmnSpinner);
         searchBTN = (Button)rootView.findViewById(R.id.searchBTN);
         searchET = (EditText)rootView.findViewById(R.id.searchET);
+        arabicBTN = (Button)rootView.findViewById(R.id.btnArabic);
         searchResultList = (ListView)rootView.findViewById(R.id.searchResultListView);
         registerForContextMenu(searchResultList);
         pbbar = (ProgressBar) rootView.findViewById(R.id.progressBar);
@@ -70,6 +73,21 @@ public class FragmentSearch extends Fragment
         SpinnerAdapter.add("Publisher");
         SpinnerAdapter.add("Phrase or word");
         btnSpeak = (Button) rootView.findViewById(R.id.btnSpeak);
+
+
+        arabicBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (arabic) {
+                    arabic = false;
+                    arabicBTN.setBackgroundColor(Color.WHITE);
+                }
+                else {
+                    arabic = true;
+                    arabicBTN.setBackgroundColor(Color.GREEN);
+                }
+            }
+        });
 
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,7 +251,12 @@ public class FragmentSearch extends Fragment
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if(arabic)
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ar-JO");
+        else
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
                 getString(R.string.action_settings));
         try {
@@ -255,6 +278,8 @@ public class FragmentSearch extends Fragment
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     searchET.setText(result.get(0));
+                    DoSearch d = new DoSearch();
+                    d.execute("");
                 }
                 break;
             }
