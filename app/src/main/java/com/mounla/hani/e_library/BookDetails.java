@@ -1,16 +1,22 @@
 package com.mounla.hani.e_library;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +31,7 @@ import java.io.OutputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class BookDetails extends AppCompatActivity {
+public class BookDetails extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
     EditText categoryTF, ISBNTF, YearTF, descriptionTF , PagesCount;
     ImageView coverPicIV;
     String Title;
@@ -65,14 +71,16 @@ public class BookDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    progressDialog.show(fmgr, "DIALOG_F1");
+
                 }
                 catch(Exception ex)
                 {
                     Toast.makeText(BookDetails.this,ex.getMessage() , Toast.LENGTH_SHORT).show();
                 }
-                SavePdfFile s = new SavePdfFile();
-                s.execute("");
+                if(isStoragePermissionGranted()) {
+                    SavePdfFile s = new SavePdfFile();
+                    s.execute("");
+                }
             }
         });
 
@@ -92,6 +100,16 @@ public class BookDetails extends AppCompatActivity {
         });
         checkBookExisting();
     }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+//            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            //resume tasks needing this permission
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -101,6 +119,25 @@ public class BookDetails extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+//                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+//                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+//            Log.v(TAG,"Permission is granted");
+            return true;
         }
     }
 
@@ -121,7 +158,15 @@ public class BookDetails extends AppCompatActivity {
 
     public class SavePdfFile extends AsyncTask<String,String,String>
     {
+        ProgressDialog pd = new ProgressDialog(BookDetails.this);
         String z = "";
+        @Override
+        protected void onPreExecute()
+        {
+            pd.setMessage("Downloading Book...Please Wait");
+            pd.setCancelable(false);
+            pd.show();
+        }
         @Override
         protected void onPostExecute(String r)
         {
@@ -131,9 +176,7 @@ public class BookDetails extends AppCompatActivity {
             else
                 result = z;
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-            FragmentProgressDialog d1 = (FragmentProgressDialog) fmgr.findFragmentByTag("DIALOG_F1");
-            if(d1 != null)
-                fmgr.beginTransaction().remove(d1).commit();
+            pd.dismiss();
 
         }
 

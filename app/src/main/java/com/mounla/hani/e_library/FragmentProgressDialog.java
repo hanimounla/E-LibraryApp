@@ -15,7 +15,7 @@ public class FragmentProgressDialog extends DialogFragment {
 	@Override
 	public ProgressDialog onCreateDialog(Bundle savedInstanceState) {
 		dialog = new ProgressDialog(getActivity());
-		dialog.setMessage("Downloading Book...");
+		dialog.setMessage("Downloading Book...Please Wait");
 		dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		dialog.setCancelable(false);
 		return dialog;

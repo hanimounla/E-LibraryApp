@@ -93,8 +93,7 @@
                 android:hint="Description"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textMultiLine"
-                android:lines="3"
-                android:maxLines="3"
+                android:maxLines="10"
                 android:singleLine="true"
                 android:textColor="#fff"
                 android:textSize="24sp"
@@ -135,18 +134,20 @@
 
          <Button
              android:id="@+id/downloadBTN"
-             android:layout_width="wrap_content"
+             android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Download"
+             android:background="@color/colorPrimary"
              android:layout_alignParentTop="true"
              android:layout_alignParentStart="true"
-             android:layout_marginStart="30dp" />
+              />
 
          <Button
              android:id="@+id/openPdfBTN"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:text="Open"
+             android:visibility="gone"
              android:layout_alignParentTop="true"
              android:layout_alignParentEnd="true"
              android:layout_marginEnd="51dp" />
