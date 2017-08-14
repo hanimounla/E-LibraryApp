@@ -139,12 +139,14 @@ public class FragmentAuthors extends Fragment {
                     z = "Error in connection with SQL server";
                 } else
                 {
-                    String query = "select b.Title ,b.ID " +
+                    String query = "select b.Title ,b.ID ,c.name " +
                             "from books b " +
                             "inner join BooksAuthors ba " +
                             "on b.ID = ba.BookID " +
                             "inner join Authors a " +
                             "on a.ID = ba.AuthorID " +
+                            "inner join categories c " +
+                            "on c.id = b.categoryID " +
                             "where a.Name = N'" + Author + "'";
 
                     PreparedStatement ps = ConnectionClass.conn.prepareStatement(query);
@@ -155,7 +157,7 @@ public class FragmentAuthors extends Fragment {
                         Map<String, String> datanum = new HashMap<String, String>();
                         datanum.put("A", rs.getString(1));
                         datanum.put("B", rs.getString(2));
-                        datanum.put("C", "Hani");
+                        datanum.put("C", rs.getString(3));
                         SearchList.add(datanum);
                     }
                     z = "Success";
